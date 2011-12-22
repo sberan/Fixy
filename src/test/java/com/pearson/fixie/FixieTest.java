@@ -12,23 +12,31 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
 public class FixieTest {
-    private EntityManager petstore;
+    EntityManager petstore;
+    EntityConstructor constructor;
 
     @Before public void setup() {
         petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
-        EntityConstructor constructor = new EntityConstructor();
-        constructor.loadEntities(getClass().getResourceAsStream("fixtures.yaml"));
-        constructor.persistEntities(petstore);
+        constructor = new EntityConstructor(petstore);
     }
 
     @After public void tearDown() {
         petstore.getTransaction().rollback();
     }
 
-    @Test public void testFoo() {
-        PetType dog = petstore.createQuery("select type from PetType type where type.name = 'Dog'", PetType.class).getSingleResult();
+    @Test public void testPetTypes() {
+        constructor.load("pet_types.yaml");
+
+        PetType dog = petstore.createQuery(
+                "select type from PetType type where type.name = 'Dog'", PetType.class)
+                .getSingleResult();
 
         assertThat(dog, is(notNullValue()));
+        assertThat(dog.getName(), is("Dog"));
+    }
+    
+    @Test public void testPets() {
+
     }
 }

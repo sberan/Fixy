@@ -23,16 +23,18 @@ import java.util.Map;
 import java.util.Queue;
 
 public class EntityConstructor extends CompactConstructor {
-    Map<String, Object> entityCache = Maps.newLinkedHashMap();
-    Multimap<Class<?>, EntityPostProcessor<? super Object>> postProcessors = HashMultimap.create();
-    private List<Object> allEntities = Lists.newArrayList();
-    private Queue<Object> processQueue = Lists.newLinkedList();
+    private final Map<String, Object> entityCache = Maps.newLinkedHashMap();
+    private final Multimap<Class<?>, EntityPostProcessor<? super Object>> postProcessors = HashMultimap.create();
+    private final List<Object> allEntities = Lists.newArrayList();
+    private final Queue<Object> processQueue = Lists.newLinkedList();
+    private final EntityManager entityManager;
     private String packageName;
 
-    public EntityConstructor() {
+    public EntityConstructor(EntityManager entityManager) {
         //this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage());
         this.packageName = "";
+        this.entityManager = entityManager;
     }
 
     /*
@@ -75,14 +77,17 @@ public class EntityConstructor extends CompactConstructor {
         return entityCache.get(node.getValue());
     }
 
-    public void loadEntities(InputStream... files) {
+    void loadEntities(String... files) {
         Yaml yaml = new Yaml(this);
-        for(InputStream file : files) {
-            yaml.load(file);
+        for(String file : files) {
+            if(!file.startsWith("/")) {
+                file = "/" + file;
+            }
+            yaml.load(getClass().getResourceAsStream(file));
         }
     }
 
-    public void persistEntities(EntityManager entityManager) {
+    void persistEntities() {
         Queue<Object> processQueue = new LinkedList<Object>(entityCache.values());
         allEntities.addAll(entityCache.values());
         while(!processQueue.isEmpty()) {
@@ -97,6 +102,11 @@ public class EntityConstructor extends CompactConstructor {
             }
             entityManager.persist(entity);
         }
+    }
+    
+    public void load(String... files) {
+        loadEntities(files);
+        persistEntities();
     }
 
     public <T> void addPostProcessor(EntityPostProcessor<T> postProcessor) {

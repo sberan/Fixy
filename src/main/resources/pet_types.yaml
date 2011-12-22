@@ -5,7 +5,3 @@
 
 - PetType(cat):
     name: Cat
-
-
-- Pet(fido):
-    type: PetType(dog)
