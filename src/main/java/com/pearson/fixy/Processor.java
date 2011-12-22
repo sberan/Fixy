@@ -1,13 +1,10 @@
 package com.pearson.fixy;
 
-import java.util.List;
 import java.util.Queue;
 
 public abstract class Processor<T> {
     Queue<Object> processQueue;
-
     private final Class<? super T> type;
-    public List<Object> allEntities;
 
     public Processor(Class<? super T> type) {
         this.type = type;
@@ -17,7 +14,6 @@ public abstract class Processor<T> {
 
     protected void addEntity(Object entity) {
         processQueue.add(entity);
-        allEntities.add(entity);
     }
 
     public Class<? super T> getType() {

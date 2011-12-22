@@ -19,19 +19,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+
+class ConstructImport extends AbstractConstruct {
+    private final Fixy fixy;
+    private final List<String> importedPackages = Lists.newArrayList();
+    
+    public ConstructImport(Fixy fixy) {
+        this.fixy = fixy;
+    }
+
+    @Override public Object construct(Node node) {
+        String location = ((ScalarNode) node).getValue();
+        if(!importedPackages.contains(location)) {
+            importedPackages.add(location);
+            fixy.loadEntities(location);
+        }
+        return null;
+    }
+}
+
+class ConstructPackage extends AbstractConstruct {
+    private final Fixy fixy;
+    
+    public ConstructPackage(Fixy fixy) {
+        this.fixy = fixy;
+    }
+
+    @Override public Object construct(Node node) {
+        String packageName = ((ScalarNode) node).getValue();
+        fixy.setPackage(packageName);
+        return null;
+    }
+}
+
+
 public class Fixy extends CompactConstructor {
     private final Map<String, Object> entityCache = Maps.newLinkedHashMap();
     private final Multimap<Class<?>, Processor<? super Object>> postProcessors = HashMultimap.create();
-    private final List<Object> allEntities = Lists.newArrayList();
-    private final Queue<Object> processQueue = Lists.newLinkedList();
     private final EntityManager entityManager;
     private final String defaultPackage;
     private String packageName;
     
-
     public Fixy(EntityManager entityManager, String defaultPackage) {
-        this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
-        this.yamlConstructors.put(new Tag("!package"), new ConstructPackage());
+        this.yamlConstructors.put(new Tag("!import"), new ConstructImport(this));
+        this.yamlConstructors.put(new Tag("!package"), new ConstructPackage(this));
         this.defaultPackage = defaultPackage;
         this.packageName = defaultPackage;
         this.entityManager = entityManager;
@@ -40,30 +71,6 @@ public class Fixy extends CompactConstructor {
     public Fixy(EntityManager entityManager) {
         this(entityManager, "");
     }
-
-    class ConstructImport extends AbstractConstruct {
-        private List<String> importedPackages = Lists.newArrayList();
-        @Override public Object construct(Node node) {
-            String location = ((ScalarNode) node).getValue();
-            if(!importedPackages.contains(location)) {
-                importedPackages.add(location);
-                String origPackage = packageName;
-                packageName = defaultPackage;
-                Fixy.this.loadEntities(location);
-                packageName = origPackage;
-            }
-            return null;
-        }
-    }
-
-    class ConstructPackage extends AbstractConstruct {
-        @Override public Object construct(Node node) {
-            String packageName = ((ScalarNode) node).getValue();
-            Fixy.this.packageName = packageName;
-            return null;
-        }
-    }
-
 
     @Override
     protected Class<?> getClassForName(String name) throws ClassNotFoundException {
@@ -76,7 +83,6 @@ public class Fixy extends CompactConstructor {
     
     @Override
     protected Object createInstance(ScalarNode node, CompactData data) throws Exception {
-        List<String> arguments = Lists.newArrayList();
         if(!entityCache.containsKey(node.getValue())) {
             data.getArguments().clear();
             Object entity = super.createInstance(node, data);
@@ -91,20 +97,21 @@ public class Fixy extends CompactConstructor {
             if(!file.startsWith("/")) {
                 file = "/" + file;
             }
+            String origPackage = getPackage();
+            setPackage(getDefaultPackage());
             yaml.load(getClass().getResourceAsStream(file));
+            setPackage(origPackage);
         }
     }
 
     void persistEntities() {
         Queue<Object> processQueue = new LinkedList<Object>(entityCache.values());
-        allEntities.addAll(entityCache.values());
         while(!processQueue.isEmpty()) {
             Object entity = processQueue.remove();
             for(Map.Entry<Class<?>, Processor<? super Object>> entry : postProcessors.entries()) {
                 if(entity.getClass().isAssignableFrom(entry.getKey())) {
                     Processor<? super Object> postProcessor = entry.getValue();
                     postProcessor.processQueue = processQueue;
-                    postProcessor.allEntities = allEntities;
                     postProcessor.process(entity);
                 }
             }
@@ -118,6 +125,20 @@ public class Fixy extends CompactConstructor {
     }
 
     public <T> void addPostProcessor(Processor<T> postProcessor) {
-        postProcessors.put(postProcessor.getType(), (Processor<? super Object>) postProcessor);
+        @SuppressWarnings("unchecked") //TODO: get the generic type of postProcessors right
+        Processor<? super Object> casted = (Processor<? super Object>) postProcessor;
+        postProcessors.put(postProcessor.getType(), casted);
+    }
+    
+    public String getDefaultPackage() {
+        return defaultPackage;
+    }
+
+    public String getPackage() {
+        return this.packageName;
+    }
+    
+    public void setPackage(String packageName) {
+        this.packageName = packageName;
     }
 }

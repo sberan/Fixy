@@ -73,4 +73,22 @@ public class FixyTest {
         
         assertThat(user.getPassword(), is("TEST_PASS"));
     }
+    
+    @Test public void testPostProcessorCanCreateEntities() {
+        Processor<Pet> createPetOwner = new Processor<Pet>(Pet.class) {
+            @Override public void process(Pet pet) {
+                User petOwner = new User();
+                petOwner.setName(pet.getName());
+                addEntity(petOwner);
+            }
+        };
+
+        fixtures.addPostProcessor(createPetOwner);
+
+        fixtures.load("pets.yaml");
+
+        User petOwner = petstore.createQuery("select u from User u  where u.name = 'Fido'", User.class).getSingleResult();
+
+        assertThat(petOwner.getName(), is("Fido"));
+    }
 }
