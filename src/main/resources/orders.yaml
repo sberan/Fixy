@@ -1,0 +1,9 @@
+- !package com.petstore
+
+- !import pets.yaml
+- !import users.yaml
+
+
+- Order(fido):
+    pet: Pet(fido)
+    user: User(george)

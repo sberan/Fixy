@@ -1,5 +1,7 @@
 package com.petstore;
 
+import com.petstore.users.User;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,9 +16,9 @@ public class Order {
     @Id @GeneratedValue
     Integer id;
 
-    @ManyToOne User user;
+    @ManyToOne(optional = false) User user;
 
-    @OneToOne Pet pet;
+    @OneToOne(optional = false) Pet pet;
 
     public Integer getId() {
         return id;

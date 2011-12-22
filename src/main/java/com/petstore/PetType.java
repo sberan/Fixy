@@ -2,6 +2,7 @@ package com.petstore;
 
 import com.google.common.collect.Lists;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ public class PetType {
     @Id @GeneratedValue
     Integer id;
 
+    @Column(nullable = false)
     String name;
 
     @OneToMany(mappedBy = "type")

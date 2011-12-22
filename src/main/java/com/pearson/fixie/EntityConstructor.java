@@ -28,20 +28,33 @@ public class EntityConstructor extends CompactConstructor {
     private final List<Object> allEntities = Lists.newArrayList();
     private final Queue<Object> processQueue = Lists.newLinkedList();
     private final EntityManager entityManager;
+    private final String defaultPackage;
     private String packageName;
+    
 
-    public EntityConstructor(EntityManager entityManager) {
+    public EntityConstructor(EntityManager entityManager, String defaultPackage) {
         this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage());
-        this.packageName = "";
+        this.defaultPackage = defaultPackage;
+        this.packageName = defaultPackage;
         this.entityManager = entityManager;
     }
 
+    public EntityConstructor(EntityManager entityManager) {
+        this(entityManager, "");
+    }
+
     class ConstructImport extends AbstractConstruct {
+        private List<String> importedPackages = Lists.newArrayList();
         @Override public Object construct(Node node) {
             String location = ((ScalarNode) node).getValue();
-
-            EntityConstructor.this.loadEntities(location);
+            if(!importedPackages.contains(location)) {
+                importedPackages.add(location);
+                String origPackage = packageName;
+                packageName = defaultPackage;
+                EntityConstructor.this.loadEntities(location);
+                packageName = origPackage;
+            }
             return null;
         }
     }

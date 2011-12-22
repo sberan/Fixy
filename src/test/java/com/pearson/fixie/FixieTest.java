@@ -1,5 +1,6 @@
 package com.pearson.fixie;
 
+import com.petstore.Order;
 import com.petstore.Pet;
 import com.petstore.PetType;
 import org.junit.After;
@@ -14,12 +15,12 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class FixieTest {
     EntityManager petstore;
-    EntityConstructor constructor;
+    EntityConstructor fixtures;
 
     @Before public void setup() {
         petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
-        constructor = new EntityConstructor(petstore);
+        fixtures = new EntityConstructor(petstore, "com.petstore");
     }
 
     @After public void tearDown() {
@@ -27,21 +28,31 @@ public class FixieTest {
     }
 
     @Test public void testPetTypes() {
-        constructor.load("pet_types.yaml");
+        fixtures.load("pet_types.yaml");
 
         PetType dog = petstore.createQuery(
                 "select type from PetType type where type.name = 'Dog'", PetType.class)
                 .getSingleResult();
 
-        assertThat(dog, is(notNullValue()));
         assertThat(dog.getName(), is("Dog"));
     }
     
     @Test public void testPets() {
-        constructor.load("pets.yaml");
+        fixtures.load("pets.yaml");
 
         Pet fido = petstore.createQuery("select p from Pet p where p.name = 'Fido'", Pet.class).getSingleResult();
 
-        assertThat(fido, notNullValue());
+        assertThat(fido.getName(), is("Fido"));
+        assertThat(fido.getType().getName(), is("Dog"));
+        
+    }
+
+    @Test
+    public void testOrders() {
+        fixtures.load("orders.yaml");
+
+        Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
+        
+        assertThat(order.getPet().getName(), is("Fido"));
     }
 }
