@@ -3,6 +3,7 @@ package com.pearson.fixie;
 import com.petstore.Order;
 import com.petstore.Pet;
 import com.petstore.PetType;
+import com.petstore.users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,5 +55,22 @@ public class FixieTest {
         Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
         
         assertThat(order.getPet().getName(), is("Fido"));
+    }
+    
+    @Test
+    public void testPostProcessor() {
+        EntityPostProcessor<User> defaultPassword = new EntityPostProcessor<User>(User.class) {
+            @Override public void process(User user) {
+                user.setPassword("TEST_PASS");
+            }
+        };
+
+        fixtures.addPostProcessor(defaultPassword);
+
+        fixtures.load("users.yaml");
+
+        User user = petstore.createQuery("select u from User u where u.name = 'George Washington'", User.class).getSingleResult();
+        
+        assertThat(user.getPassword(), is("TEST_PASS"));
     }
 }
