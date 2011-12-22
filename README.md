@@ -13,6 +13,7 @@ Example
 employees.yaml:
 
     - !package com.innotech
+    
     - Employee(bill):
         firstName: Bill
         lastName: Lumbergh
