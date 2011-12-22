@@ -11,4 +11,4 @@ bin/
 MANIFEST.MF
 .DS_Store
 derby.log
-petstore/
+/petstore/
