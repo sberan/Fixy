@@ -11,8 +11,8 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.*;
 
 public class FixieTest {
     EntityManager petstore;
