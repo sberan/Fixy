@@ -1,3 +1,4 @@
+- !package com.petstore
 
 - PetType(dog):
     name: Dog

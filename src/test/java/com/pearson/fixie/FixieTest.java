@@ -17,7 +17,7 @@ public class FixieTest {
     @Before public void setup() {
         petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
-        EntityConstructor constructor = new EntityConstructor("com.petstore");
+        EntityConstructor constructor = new EntityConstructor();
         constructor.loadEntities(getClass().getResourceAsStream("fixtures.yaml"));
         constructor.persistEntities(petstore);
     }
