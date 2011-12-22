@@ -1,7 +1,7 @@
 Fixy
 ========
 
-    YAML test fixtures for JPA. Because sometimes you need to test your queries.
+YAML test fixtures for JPA. Because sometimes you need to test your queries.
 
 
 
