@@ -6,6 +6,18 @@
     <artifactId>fixy</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <url>https://github.com/samberan/mvn-repo/raw/master/releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <url>https://github.com/samberan/samberan-mvn-repo/raw/master/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.yaml</groupId>
