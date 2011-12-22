@@ -4,7 +4,7 @@ Fixy
 Fixy makes unit testing your JPA entities much easier using YAML to
 create test fixtures and persist them to your database. It's mostly
 a rip off of Rails and Play! Framework's test fixtures, with a few
-goodies added such as *package declaration*, *imports*, and *processors*
+goodies added such as **package declaration**, **imports**, and **processors**
 
 
 
