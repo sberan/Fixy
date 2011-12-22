@@ -52,7 +52,10 @@ class ConstructPackage extends AbstractConstruct {
     }
 }
 
-
+/**
+ * Fixy allows you to create JPA test fixtures from YAML markup.
+ *
+ */
 public class Fixy extends CompactConstructor {
     private final Map<String, Object> entityCache = Maps.newLinkedHashMap();
     private final Multimap<Class<?>, Processor<? super Object>> postProcessors = HashMultimap.create();
@@ -124,7 +127,7 @@ public class Fixy extends CompactConstructor {
         persistEntities();
     }
 
-    public <T> void addPostProcessor(Processor<T> postProcessor) {
+    public <T> void addProcessor(Processor<T> postProcessor) {
         @SuppressWarnings("unchecked") //TODO: get the generic type of postProcessors right
         Processor<? super Object> casted = (Processor<? super Object>) postProcessor;
         postProcessors.put(postProcessor.getType(), casted);

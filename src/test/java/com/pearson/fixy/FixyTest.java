@@ -65,7 +65,7 @@ public class FixyTest {
             }
         };
 
-        fixtures.addPostProcessor(defaultPassword);
+        fixtures.addProcessor(defaultPassword);
 
         fixtures.load("users.yaml");
 
@@ -83,7 +83,7 @@ public class FixyTest {
             }
         };
 
-        fixtures.addPostProcessor(createPetOwner);
+        fixtures.addProcessor(createPetOwner);
 
         fixtures.load("pets.yaml");
 
