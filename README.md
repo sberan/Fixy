@@ -30,7 +30,7 @@ Now use your fixtures from Java:
     fixtures.load("employees.yaml");
 
     //run query
-    Employee peter = entityManager.createNamedQuery("developers").getSingleResult();
+    Employee peter = entityManager.createNamedQuery("developers", Employee.class).getSingleResult();
 
     //profit
     assertEquals("Gibbons", peter.getLastName());
