@@ -53,6 +53,9 @@ departments.yaml:
             - Employee(samir)
             - Employee(michael)
 
+Package declarations are scoped to the file, and files are guaranteed to only import one time, regardless of how many
+times they are declared.
+
 Processors
 -------------
 Processors allow you to simulate stored procedures and other junk before your entities get persisted.
