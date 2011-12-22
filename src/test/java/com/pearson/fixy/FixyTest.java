@@ -1,4 +1,4 @@
-package com.pearson.fixie;
+package com.pearson.fixy;
 
 import com.petstore.Order;
 import com.petstore.Pet;
@@ -14,14 +14,14 @@ import javax.persistence.Persistence;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class FixieTest {
+public class FixyTest {
     EntityManager petstore;
-    EntityConstructor fixtures;
+    Fixy fixtures;
 
     @Before public void setup() {
         petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
-        fixtures = new EntityConstructor(petstore, "com.petstore");
+        fixtures = new Fixy(petstore, "com.petstore");
     }
 
     @After public void tearDown() {
@@ -59,7 +59,7 @@ public class FixieTest {
     
     @Test
     public void testPostProcessor() {
-        EntityPostProcessor<User> defaultPassword = new EntityPostProcessor<User>(User.class) {
+        Processor<User> defaultPassword = new Processor<User>(User.class) {
             @Override public void process(User user) {
                 user.setPassword("TEST_PASS");
             }

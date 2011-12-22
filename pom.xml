@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pearson</groupId>
-    <artifactId>fixie</artifactId>
+    <artifactId>fixy</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>

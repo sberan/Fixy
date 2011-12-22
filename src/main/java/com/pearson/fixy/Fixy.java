@@ -1,4 +1,4 @@
-package com.pearson.fixie;
+package com.pearson.fixy;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
@@ -9,22 +9,19 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
 import org.yaml.snakeyaml.extensions.compactnotation.CompactConstructor;
 import org.yaml.snakeyaml.extensions.compactnotation.CompactData;
-import org.yaml.snakeyaml.extensions.compactnotation.PackageCompactConstructor;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.Tag;
 
 import javax.persistence.EntityManager;
-import java.io.InputStream;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-public class EntityConstructor extends CompactConstructor {
+public class Fixy extends CompactConstructor {
     private final Map<String, Object> entityCache = Maps.newLinkedHashMap();
-    private final Multimap<Class<?>, EntityPostProcessor<? super Object>> postProcessors = HashMultimap.create();
+    private final Multimap<Class<?>, Processor<? super Object>> postProcessors = HashMultimap.create();
     private final List<Object> allEntities = Lists.newArrayList();
     private final Queue<Object> processQueue = Lists.newLinkedList();
     private final EntityManager entityManager;
@@ -32,7 +29,7 @@ public class EntityConstructor extends CompactConstructor {
     private String packageName;
     
 
-    public EntityConstructor(EntityManager entityManager, String defaultPackage) {
+    public Fixy(EntityManager entityManager, String defaultPackage) {
         this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage());
         this.defaultPackage = defaultPackage;
@@ -40,7 +37,7 @@ public class EntityConstructor extends CompactConstructor {
         this.entityManager = entityManager;
     }
 
-    public EntityConstructor(EntityManager entityManager) {
+    public Fixy(EntityManager entityManager) {
         this(entityManager, "");
     }
 
@@ -52,7 +49,7 @@ public class EntityConstructor extends CompactConstructor {
                 importedPackages.add(location);
                 String origPackage = packageName;
                 packageName = defaultPackage;
-                EntityConstructor.this.loadEntities(location);
+                Fixy.this.loadEntities(location);
                 packageName = origPackage;
             }
             return null;
@@ -62,7 +59,7 @@ public class EntityConstructor extends CompactConstructor {
     class ConstructPackage extends AbstractConstruct {
         @Override public Object construct(Node node) {
             String packageName = ((ScalarNode) node).getValue();
-            EntityConstructor.this.packageName = packageName;
+            Fixy.this.packageName = packageName;
             return null;
         }
     }
@@ -103,9 +100,9 @@ public class EntityConstructor extends CompactConstructor {
         allEntities.addAll(entityCache.values());
         while(!processQueue.isEmpty()) {
             Object entity = processQueue.remove();
-            for(Map.Entry<Class<?>, EntityPostProcessor<? super Object>> entry : postProcessors.entries()) {
+            for(Map.Entry<Class<?>, Processor<? super Object>> entry : postProcessors.entries()) {
                 if(entity.getClass().isAssignableFrom(entry.getKey())) {
-                    EntityPostProcessor<? super Object> postProcessor = entry.getValue();
+                    Processor<? super Object> postProcessor = entry.getValue();
                     postProcessor.processQueue = processQueue;
                     postProcessor.allEntities = allEntities;
                     postProcessor.process(entity);
@@ -120,7 +117,7 @@ public class EntityConstructor extends CompactConstructor {
         persistEntities();
     }
 
-    public <T> void addPostProcessor(EntityPostProcessor<T> postProcessor) {
-        postProcessors.put(postProcessor.getType(), (EntityPostProcessor<? super Object>) postProcessor);
+    public <T> void addPostProcessor(Processor<T> postProcessor) {
+        postProcessors.put(postProcessor.getType(), (Processor<? super Object>) postProcessor);
     }
 }

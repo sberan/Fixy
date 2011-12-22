@@ -1,15 +1,15 @@
-package com.pearson.fixie;
+package com.pearson.fixy;
 
 import java.util.List;
 import java.util.Queue;
 
-public abstract class EntityPostProcessor<T> {
+public abstract class Processor<T> {
     Queue<Object> processQueue;
 
     private final Class<? super T> type;
     public List<Object> allEntities;
 
-    public EntityPostProcessor(Class<? super T> type) {
+    public Processor(Class<? super T> type) {
         this.type = type;
     }
 
