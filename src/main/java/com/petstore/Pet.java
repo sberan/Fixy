@@ -13,7 +13,7 @@ public class Pet {
 
     String name;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     PetType type;
     
     Long price;

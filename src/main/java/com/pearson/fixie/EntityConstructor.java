@@ -31,22 +31,20 @@ public class EntityConstructor extends CompactConstructor {
     private String packageName;
 
     public EntityConstructor(EntityManager entityManager) {
-        //this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
+        this.yamlConstructors.put(new Tag("!import"), new ConstructImport());
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage());
         this.packageName = "";
         this.entityManager = entityManager;
     }
 
-    /*
     class ConstructImport extends AbstractConstruct {
         @Override public Object construct(Node node) {
             String location = ((ScalarNode) node).getValue();
 
-            new Yaml(EntityConstructor.this).load(getClass().getResourceAsStream(location));
+            EntityConstructor.this.loadEntities(location);
             return null;
         }
     }
-    */
 
     class ConstructPackage extends AbstractConstruct {
         @Override public Object construct(Node node) {

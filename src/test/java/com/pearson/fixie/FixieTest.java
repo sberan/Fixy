@@ -1,5 +1,6 @@
 package com.pearson.fixie;
 
+import com.petstore.Pet;
 import com.petstore.PetType;
 import org.junit.After;
 import org.junit.Before;
@@ -37,6 +38,10 @@ public class FixieTest {
     }
     
     @Test public void testPets() {
+        constructor.load("pets.yaml");
 
+        Pet fido = petstore.createQuery("select p from Pet p where p.name = 'Fido'", Pet.class).getSingleResult();
+
+        assertThat(fido, notNullValue());
     }
 }
