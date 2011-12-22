@@ -1,6 +1,7 @@
 Fixy
 ========
->     YAML test fixtures for JPA. Because sometimes you need to test your queries.
+
+    YAML test fixtures for JPA. Because sometimes you need to test your queries.
 
 
 
@@ -9,7 +10,6 @@ Example
 employees.yaml:
 
     - !package com.innotech
-
     - Employee(bill):
         firstName: Bill
         lastName: Lumbergh
@@ -54,6 +54,7 @@ Processors
 Processors allow simulation of stored procedures and other junk. You can add new entities via the processor as well.
 
 Java Example:
+
     Fixy fixtures = new Fixy(entityManager);
     fixtures.addProcessor(new Processor<Employee>(Employee.class) {
         public void process(Employee emp) {
