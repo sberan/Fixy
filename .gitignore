@@ -10,3 +10,5 @@ bin/
 *.idea
 MANIFEST.MF
 .DS_Store
+derby.log
+petstore/

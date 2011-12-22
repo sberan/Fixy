@@ -1,0 +1,10 @@
+
+- PetType(dog):
+    name: Dog
+
+- PetType(cat):
+    name: Cat
+
+
+- Pet(fido):
+    type: PetType(dog)
