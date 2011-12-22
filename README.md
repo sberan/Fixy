@@ -1,7 +1,10 @@
 Fixy
 ========
 
-YAML test fixtures for JPA. Because sometimes you need to test your queries.
+Fixy makes unit testing your JPA entities much easier using YAML to
+create test fixtures and persist them to your database. It's mostly
+a rip off of Rails and Play! Framework's test fixtures, with a few
+goodies added such as *package declaration*, *imports*, and *processors*
 
 
 
@@ -51,7 +54,8 @@ departments.yaml:
 
 Processors
 -------------
-Processors allow simulation of stored procedures and other junk. You can add new entities via the processor as well.
+Processors allow you to simulate stored procedures and other junk before your entities get persisted.
+You can add new entities via the processor as well.
 
 Java Example:
 
