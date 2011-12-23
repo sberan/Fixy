@@ -1,8 +1,7 @@
-![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
 
 Fixy : Yaml fixtures for JPA
 ========
-
+![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
 Fixy makes unit testing your JPA entities much easier using YAML to
 create test fixtures and persist them to your database. It's mostly
 a rip off of Rails and Play! Framework's test fixtures, with a few
