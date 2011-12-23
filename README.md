@@ -88,7 +88,7 @@ And the Fixie dependency:
     <dependency>
         <groupId>com.pearson</groupId>
         <artifactId>fixy</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </dependency>
 
 
