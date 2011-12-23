@@ -75,7 +75,7 @@ Java Example:
 
 Installing
 ---------------
-The fixie jars are located in [My Repository](https://github.com/sberan/mvn-repo/).
+The Fixy jars are located in [My Repository](https://github.com/sberan/mvn-repo/).
 
 If you're using Maven, simply add my Maven repository:
    
@@ -85,7 +85,7 @@ If you're using Maven, simply add my Maven repository:
       <url>https://github.com/sberan/mvn-repo/raw/master/releases</url>
     </repository>
 
-And the Fixie dependency:
+And the Fixy dependency:
 
     <dependency>
         <groupId>com.pearson</groupId>
