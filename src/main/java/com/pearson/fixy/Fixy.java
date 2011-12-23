@@ -100,10 +100,10 @@ public class Fixy extends CompactConstructor {
             if(!file.startsWith("/")) {
                 file = "/" + file;
             }
-            String origPackage = getPackage();
-            setPackage(getDefaultPackage());
+            String origPackage = this.packageName;
+            this.packageName = this.defaultPackage;
             yaml.load(getClass().getResourceAsStream(file));
-            setPackage(origPackage);
+            this.packageName = origPackage;
         }
     }
 
@@ -133,15 +133,7 @@ public class Fixy extends CompactConstructor {
         postProcessors.put(postProcessor.getType(), casted);
     }
     
-    public String getDefaultPackage() {
-        return defaultPackage;
-    }
-
-    public String getPackage() {
-        return this.packageName;
-    }
-    
-    public void setPackage(String packageName) {
+    void setPackage(String packageName) {
         this.packageName = packageName;
     }
 }
