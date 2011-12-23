@@ -1,3 +1,5 @@
+![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
+
 Fixy : Yaml fixtures for JPA
 ========
 
