@@ -1,12 +1,10 @@
-
 Fixy : Yaml fixtures for JPA
 ========
 ![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
 
-Fixy makes unit testing your JPA entities much easier using YAML to
-create test fixtures and persist them to your database. It's mostly
-a rip off of Rails and Play! Framework's test fixtures, with a few
-goodies added such as **package declaration**, **imports**, and **processors**
+Fixy makes unit testing your JPA entities much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
+create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test 
+fixtures, with a few goodies added such as **package declaration**, **imports**, and **processors**
 
 
 
