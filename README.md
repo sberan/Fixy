@@ -1,4 +1,4 @@
-Fixy
+Fixy : Yaml fixtures for JPA
 ========
 
 Fixy makes unit testing your JPA entities much easier using YAML to
@@ -71,6 +71,25 @@ Java Example:
     });
 
 
+Installing
+---------------
+The fixie jars are located in [My Repository](https://github.com/sberan/mvn-repo/).
+
+If you're using Maven, simply add my Maven repository:
+   
+    <repository>
+      <id>sberan-github</id>
+      <name>sberan-github</name>
+      <url>https://github.com/sberan/mvn-repo/raw/master/releases</url>
+    </repository>
+
+And the Fixie dependency:
+
+    <dependency>
+        <groupId>com.pearson</groupId>
+        <artifactId>fixy</artifactId>
+        <version>1.0</version>
+    </dependency>
 
 
 More Info
