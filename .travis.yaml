@@ -1,2 +1,3 @@
+---
 language: clojure
 script: mvn clean install
