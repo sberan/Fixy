@@ -1,3 +1,2 @@
----
-language: clojure
+install: echo install
 script: mvn clean install
