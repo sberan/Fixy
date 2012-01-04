@@ -92,11 +92,4 @@ public class FixyTest {
 
         assertThat(petOwner.getName(), is("Fido"));
     }
-
-    @Test
-    public void testSam() {
-        Object load = new Yaml().load(getClass().getResourceAsStream("/sam.yaml"));
-
-
-    }
 }
