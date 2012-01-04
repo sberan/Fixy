@@ -1,6 +1,7 @@
 Fixy : Yaml fixtures for JPA
 ========
 ![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
+
 ![build status](https://secure.travis-ci.org/sberan/Comprendo.png)
 
 Fixy makes unit testing your JPA entities much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
