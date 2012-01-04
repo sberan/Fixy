@@ -7,6 +7,7 @@ import com.petstore.users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.yaml.snakeyaml.Yaml;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -90,5 +91,12 @@ public class FixyTest {
         User petOwner = petstore.createQuery("select u from User u  where u.name = 'Fido'", User.class).getSingleResult();
 
         assertThat(petOwner.getName(), is("Fido"));
+    }
+
+    @Test
+    public void testSam() {
+        Object load = new Yaml().load(getClass().getResourceAsStream("/sam.yaml"));
+
+
     }
 }

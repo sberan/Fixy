@@ -48,7 +48,7 @@ class ConstructPackage extends AbstractConstruct {
     @Override public Object construct(Node node) {
         String packageName = ((ScalarNode) node).getValue();
         fixy.setPackage(packageName);
-        return null;
+        return "";
     }
 }
 
