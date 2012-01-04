@@ -1,2 +1,0 @@
-install: echo install
-script: mvn clean install
