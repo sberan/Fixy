@@ -19,6 +19,8 @@ public class Order {
     @ManyToOne(optional = false) User user;
 
     @OneToOne(optional = false) Pet pet;
+    
+    private Adress adress;
 
     public Integer getId() {
         return id;
@@ -43,4 +45,14 @@ public class Order {
     public void setPet(Pet pet) {
         this.pet = pet;
     }
+
+	public Adress getAdress()
+	{
+		return adress;
+	}
+
+	public void setAdress(Adress adress)
+	{
+		this.adress = adress;
+	}
 }

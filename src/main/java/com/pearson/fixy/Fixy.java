@@ -13,6 +13,7 @@ import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.Tag;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import java.util.LinkedList;
 import java.util.List;
@@ -118,7 +119,10 @@ public class Fixy extends CompactConstructor {
                     postProcessor.process(entity);
                 }
             }
-            entityManager.persist(entity);
+            if(entity.getClass().isAnnotationPresent(Entity.class))
+            {
+                entityManager.persist(entity);
+            }
         }
     }
     

@@ -59,6 +59,15 @@ public class FixyTest {
     }
     
     @Test
+    public void testAdress() {
+        fixtures.load("adress.yaml");
+
+        Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
+        
+        assertThat(order.getAdress().getCity(), is("Paris"));
+    }
+    
+    @Test
     public void testPostProcessor() {
         Processor<User> defaultPassword = new Processor<User>(User.class) {
             @Override public void process(User user) {
