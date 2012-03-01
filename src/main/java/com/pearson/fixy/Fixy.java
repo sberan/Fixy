@@ -119,8 +119,7 @@ public class Fixy extends CompactConstructor {
                     postProcessor.process(entity);
                 }
             }
-            if(entity.getClass().isAnnotationPresent(Entity.class))
-            {
+            if(entity.getClass().isAnnotationPresent(Entity.class)) {
                 entityManager.persist(entity);
             }
         }

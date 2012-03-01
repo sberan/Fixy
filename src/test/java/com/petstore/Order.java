@@ -10,16 +10,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     Integer id;
 
-    @ManyToOne(optional = false) User user;
+    @ManyToOne(optional = false)
+    User user;
 
-    @OneToOne(optional = false) Pet pet;
-    
+    @OneToOne(optional = false)
+    Pet pet;
+
     private Adress adress;
 
     public Integer getId() {
@@ -46,13 +49,11 @@ public class Order {
         this.pet = pet;
     }
 
-	public Adress getAdress()
-	{
-		return adress;
-	}
+    public Adress getAdress() {
+        return adress;
+    }
 
-	public void setAdress(Adress adress)
-	{
-		this.adress = adress;
-	}
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
 }
