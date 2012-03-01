@@ -23,7 +23,7 @@ public class Order {
     @OneToOne(optional = false)
     Pet pet;
 
-    private Adress adress;
+    private Address address;
 
     public Integer getId() {
         return id;
@@ -49,11 +49,11 @@ public class Order {
         this.pet = pet;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

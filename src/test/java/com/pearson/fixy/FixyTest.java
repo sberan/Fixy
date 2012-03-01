@@ -7,7 +7,6 @@ import com.petstore.users.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yaml.snakeyaml.Yaml;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -60,11 +59,11 @@ public class FixyTest {
     
     @Test
     public void testAdress() {
-        fixtures.load("adress.yaml");
+        fixtures.load("address.yaml");
 
         Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
         
-        assertThat(order.getAdress().getCity(), is("Paris"));
+        assertThat(order.getAddress().getCity(), is("Paris"));
     }
     
     @Test

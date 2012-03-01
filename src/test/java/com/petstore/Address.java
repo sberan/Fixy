@@ -3,7 +3,7 @@ package com.petstore;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Adress {
+public class Address {
     String city;
     String country;
     String stateOrProvince;

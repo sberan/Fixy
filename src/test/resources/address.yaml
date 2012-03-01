@@ -3,7 +3,7 @@
 - !import pets.yaml
 - !import users.yaml
 
-- Adress(georgeHome):
+- Address(georgeHome):
     city: Paris
     country: France
     stateOrProvince: IDF
@@ -13,6 +13,6 @@
 - Order(fido):
     pet: Pet(fido)
     user: User(george)
-    adress: Adress(georgeHome)
+    address: Address(georgeHome)
 
     
