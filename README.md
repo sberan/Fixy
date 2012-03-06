@@ -90,7 +90,7 @@ And the Fixy dependency:
     <dependency>
         <groupId>com.pearson</groupId>
         <artifactId>fixy</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
     </dependency>
 
 
