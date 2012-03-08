@@ -18,10 +18,11 @@ import static org.junit.Assert.assertThat;
 
 public class FixyTest {
     JPAPersister jpaPersister;
+    EntityManager petstore;
     Fixy fixtures;
 
     @Before public void setup() {
-    	EntityManager petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
+    	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         jpaPersister = new JPAPersister(petstore);
     	petstore.getTransaction().begin();
         fixtures = new Fixy(jpaPersister, "com.petstore");
@@ -34,9 +35,7 @@ public class FixyTest {
     @Test public void testPetTypes() {
         fixtures.load("pet_types.yaml");
 
-        PetType dog = jpaPersister.getEntityManager().createQuery(
-                "select type from PetType type where type.name = 'Dog'", PetType.class)
-                .getSingleResult();
+        PetType dog = petstore.createQuery("select type from PetType type where type.name = 'Dog'", PetType.class).getSingleResult();
 
         assertThat(dog.getName(), is("Dog"));
     }
@@ -44,7 +43,7 @@ public class FixyTest {
     @Test public void testPets() {
         fixtures.load("pets.yaml");
 
-        Pet fido = jpaPersister.getEntityManager().createQuery("select p from Pet p where p.name = 'Fido'", Pet.class).getSingleResult();
+        Pet fido = petstore.createQuery("select p from Pet p where p.name = 'Fido'", Pet.class).getSingleResult();
 
         assertThat(fido.getName(), is("Fido"));
         assertThat(fido.getType().getName(), is("Dog"));
@@ -55,7 +54,7 @@ public class FixyTest {
     public void testOrders() {
         fixtures.load("orders.yaml");
 
-        Order order = jpaPersister.getEntityManager().createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
+        Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
         
         assertThat(order.getPet().getName(), is("Fido"));
     }
@@ -64,7 +63,7 @@ public class FixyTest {
     public void testAddress() {
         fixtures.load("address.yaml");
 
-        Order order = jpaPersister.getEntityManager().createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
+        Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
         
         assertThat(order.getAddress().getCity(), is("Paris"));
     }
@@ -81,7 +80,7 @@ public class FixyTest {
 
         fixtures.load("users.yaml");
 
-        User user = jpaPersister.getEntityManager().createQuery("select u from User u where u.name = 'George Washington'", User.class).getSingleResult();
+        User user = petstore.createQuery("select u from User u where u.name = 'George Washington'", User.class).getSingleResult();
         
         assertThat(user.getPassword(), is("TEST_PASS"));
     }
@@ -99,7 +98,7 @@ public class FixyTest {
 
         fixtures.load("pets.yaml");
 
-        User petOwner = jpaPersister.getEntityManager().createQuery("select u from User u  where u.name = 'Fido'", User.class).getSingleResult();
+        User petOwner = petstore.createQuery("select u from User u  where u.name = 'Fido'", User.class).getSingleResult();
 
         assertThat(petOwner.getName(), is("Fido"));
     }
