@@ -7,14 +7,13 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.AbstractConstruct;
+
 import org.yaml.snakeyaml.extensions.compactnotation.CompactConstructor;
 import org.yaml.snakeyaml.extensions.compactnotation.CompactData;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.Tag;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -60,20 +59,20 @@ class ConstructPackage extends AbstractConstruct {
 public class Fixy extends CompactConstructor {
     private final Map<String, Object> entityCache = Maps.newLinkedHashMap();
     private final Multimap<Class<?>, Processor<? super Object>> postProcessors = HashMultimap.create();
-    private final EntityManager entityManager;
+    private final Persister persister;
     private final String defaultPackage;
     private String packageName;
     
-    public Fixy(EntityManager entityManager, String defaultPackage) {
+    public Fixy(Persister persister, String defaultPackage) {
         this.yamlConstructors.put(new Tag("!import"), new ConstructImport(this));
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage(this));
         this.defaultPackage = defaultPackage;
         this.packageName = defaultPackage;
-        this.entityManager = entityManager;
+        this.persister = persister;
     }
 
-    public Fixy(EntityManager entityManager) {
-        this(entityManager, "");
+    public Fixy(Persister persister) {
+        this(persister, "");
     }
 
     @Override
@@ -96,7 +95,7 @@ public class Fixy extends CompactConstructor {
     }
 
     void loadEntities(String... files) {
-        Yaml yaml = new Yaml(this);
+    	Yaml yaml = new Yaml(this);
         for(String file : files) {
             if(!file.startsWith("/")) {
                 file = "/" + file;
@@ -119,9 +118,7 @@ public class Fixy extends CompactConstructor {
                     postProcessor.process(entity);
                 }
             }
-            if(entity.getClass().isAnnotationPresent(Entity.class)) {
-                entityManager.persist(entity);
-            }
+            persister.persist(entity);
         }
     }
     
