@@ -1,9 +1,11 @@
 package com.pearson.fixy;
 
+import com.fixy.JPAPersister;
 import com.petstore.Order;
 import com.petstore.Pet;
 import com.petstore.PetType;
 import com.petstore.users.User;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,25 +17,25 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class FixyTest {
+    JPAPersister jpaPersister;
     EntityManager petstore;
     Fixy fixtures;
 
     @Before public void setup() {
-        petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
-        petstore.getTransaction().begin();
-        fixtures = new Fixy(petstore, "com.petstore");
+    	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
+        jpaPersister = new JPAPersister(petstore);
+    	petstore.getTransaction().begin();
+        fixtures = new Fixy(jpaPersister, "com.petstore");
     }
 
     @After public void tearDown() {
-        petstore.getTransaction().rollback();
+        jpaPersister.getEntityManager().getTransaction().rollback();
     }
 
     @Test public void testPetTypes() {
         fixtures.load("pet_types.yaml");
 
-        PetType dog = petstore.createQuery(
-                "select type from PetType type where type.name = 'Dog'", PetType.class)
-                .getSingleResult();
+        PetType dog = petstore.createQuery("select type from PetType type where type.name = 'Dog'", PetType.class).getSingleResult();
 
         assertThat(dog.getName(), is("Dog"));
     }
@@ -58,7 +60,7 @@ public class FixyTest {
     }
     
     @Test
-    public void testAdress() {
+    public void testAddress() {
         fixtures.load("address.yaml");
 
         Order order = petstore.createQuery("select o from Order o where o.pet.name= 'Fido'", Order.class).getSingleResult();
