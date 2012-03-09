@@ -1,8 +1,0 @@
-- !import pet_types.yaml
-
-#testing recursive import
-- !import users.yaml
-
-- Pet(garfield):
-    name: "Garfield"
-    type: PetType(cat)

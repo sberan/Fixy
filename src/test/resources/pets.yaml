@@ -1,6 +1,0 @@
-
-- !import pet_types.yaml
-
-- Pet(fido):
-    name: Fido
-    type: PetType(dog)

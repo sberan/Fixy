@@ -1,7 +1,0 @@
-- !package com.petstore
-
-- PetType(dog):
-    name: Dog
-
-- PetType(cat):
-    name: Cat

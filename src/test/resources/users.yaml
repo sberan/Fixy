@@ -1,8 +1,0 @@
-
-- !package com.petstore.users
-
-#import a pet just to make sure the default package stuff works
-- !import user_pet.yaml
-
-- User(george):
-    name: George Washington
