@@ -2,7 +2,6 @@ Fixy : Yaml fixtures for Java
 ========
 [![Build Status](https://secure.travis-ci.org/sberan/Fixy.png?branch=master)](http://travis-ci.org/sberan/Fixy)
 
-![build status](https://secure.travis-ci.org/sberan/Fixy.png)
 
 Fixy makes unit testing your persistence layer much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
 create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test 
