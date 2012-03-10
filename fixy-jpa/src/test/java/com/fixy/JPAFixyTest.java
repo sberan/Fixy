@@ -15,14 +15,14 @@ import javax.persistence.Persistence;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class FixyTest {
+public class JPAFixyTest {
     EntityManager petstore;
     Fixy fixtures;
 
     @Before public void setup() {
     	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
-        fixtures = new JPAFixy(petstore, "com.petstore");
+        fixtures = JPAFixy.create(petstore, "com.petstore");
     }
 
     @After public void tearDown() {

@@ -2,12 +2,12 @@ package com.fixy;
 
 import com.google.code.morphia.Datastore;
 
-public class MorphiaFixy extends Fixy {
-    public MorphiaFixy(Datastore datastore, String defaultPackage) {
-        super(new MorphiaPersister(datastore), defaultPackage);
+public class MorphiaFixy {
+    public static Fixy create(Datastore datastore, String defaultPackage) {
+        return  new CoreFixy(new MorphiaPersister(datastore), defaultPackage);
     }
 
-    public MorphiaFixy(Datastore datastore) {
-        super(new MorphiaPersister(datastore));
+    public Fixy create(Datastore datastore) {
+        return new CoreFixy(new MorphiaPersister(datastore));
     }
 }

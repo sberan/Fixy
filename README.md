@@ -1,6 +1,6 @@
 Fixy : Yaml fixtures for Java
 ========
-![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
+![Fixy](https://raw.github.com/sberan/Fixy/master/coreFixy.jpg)
 
 ![build status](https://secure.travis-ci.org/sberan/Fixy.png)
 
@@ -95,7 +95,7 @@ And the Fixy dependency:
 
     <dependency>
         <groupId>com.pearson</groupId>
-        <artifactId>fixy-jpa</artifactId>
+        <artifactId>coreFixy-jpa</artifactId>
         <version>2.0</version>
     </dependency>
 
@@ -104,7 +104,7 @@ And the Fixy dependency:
 
     <dependency>
         <groupId>com.pearson</groupId>
-        <artifactId>fixy-morphia</artifactId>
+        <artifactId>coreFixy-morphia</artifactId>
         <version>2.0</version>
     </dependency>
 
