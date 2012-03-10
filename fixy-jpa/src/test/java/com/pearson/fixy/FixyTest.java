@@ -1,6 +1,6 @@
 package com.pearson.fixy;
 
-import com.fixy.JPAPersister;
+import com.fixy.JPAFixy;
 import com.petstore.Order;
 import com.petstore.Pet;
 import com.petstore.PetType;
@@ -17,19 +17,17 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class FixyTest {
-    JPAPersister jpaPersister;
     EntityManager petstore;
     Fixy fixtures;
 
     @Before public void setup() {
     	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
-        jpaPersister = new JPAPersister(petstore);
-    	petstore.getTransaction().begin();
-        fixtures = new Fixy(jpaPersister, "com.petstore");
+        petstore.getTransaction().begin();
+        fixtures = new JPAFixy(petstore, "com.petstore");
     }
 
     @After public void tearDown() {
-        jpaPersister.getEntityManager().getTransaction().rollback();
+        petstore.getTransaction().rollback();
     }
 
     @Test public void testPetTypes() {

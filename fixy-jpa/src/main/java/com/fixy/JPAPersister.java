@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 
 import com.pearson.fixy.Persister;
 
-public class JPAPersister implements Persister {
+class JPAPersister implements Persister {
 
     private final EntityManager entityManager;
 
