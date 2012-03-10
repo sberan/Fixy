@@ -10,6 +10,7 @@
     <modules>
         <module>fixy-core</module>
         <module>fixy-jpa</module>
+        <module>fixy-morphia</module>
     </modules>
 
     <distributionManagement>
@@ -23,6 +24,13 @@
             <url>https://github.com/sberan/mvn-repo/raw/master/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+      <repository>
+        <id>morphia</id>
+        <url>http://morphia.googlecode.com/svn/mavenrepo/</url>
+      </repository>
+    </repositories>
 
     <properties>
         <altDeploymentRepository>snapshot-repo::default::file:../mvn-repo/releases</altDeploymentRepository>
@@ -71,6 +79,13 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>1.6.4</version>
             </dependency>
+
+            <dependency> 
+                <groupId>com.google.code.morphia</groupId> 
+                <artifactId>morphia</artifactId> 
+                <version>0.99</version> 
+                <scope>provided</scope>
+            </dependency> 
         </dependencies>
     </dependencyManagement>
 
