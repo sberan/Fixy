@@ -1,0 +1,18 @@
+- !package com.petstore
+
+- !import pets.yaml
+- !import users.yaml
+
+- Address(georgeHome):
+    city: Paris
+    country: France
+    stateOrProvince: IDF
+    postalCode: !!str 75015
+    street: Champs Elysee
+
+- Order(fido):
+    pet: Pet(fido)
+    user: User(george)
+    address: Address(georgeHome)
+
+    
