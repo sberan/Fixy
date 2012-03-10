@@ -111,4 +111,4 @@ And the Fixy dependency:
 More Info
 -----------
 
-For now, have a look at the unit tests. If people start using this I'll add a wiki or something.
+For now, have a look at the unit tests for your persistence framework.

@@ -1,7 +1,5 @@
 package com.fixy;
 
-import com.pearson.fixy.Fixy;
-
 import javax.persistence.EntityManager;
 
 public class JPAFixy extends Fixy {

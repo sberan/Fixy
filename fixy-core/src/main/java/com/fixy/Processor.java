@@ -1,4 +1,4 @@
-package com.pearson.fixy;
+package com.fixy;
 
 import java.util.Queue;
 

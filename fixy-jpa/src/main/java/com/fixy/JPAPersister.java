@@ -3,8 +3,6 @@ package com.fixy;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
-import com.pearson.fixy.Persister;
-
 class JPAPersister implements Persister {
 
     private final EntityManager entityManager;

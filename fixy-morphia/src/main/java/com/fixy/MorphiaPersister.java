@@ -2,7 +2,6 @@ package com.fixy;
 
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.annotations.Entity;
-import com.pearson.fixy.Persister;
 
 public class MorphiaPersister implements Persister {
 

@@ -1,6 +1,5 @@
-package com.pearson.fixy;
+package com.fixy;
 
-import com.fixy.JPAFixy;
 import com.petstore.Order;
 import com.petstore.Pet;
 import com.petstore.PetType;
