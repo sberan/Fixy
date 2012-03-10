@@ -1,3 +1,1 @@
-language: clojure
-install: mvn validate
-script: mvn test
+language: java
