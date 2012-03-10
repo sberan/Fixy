@@ -68,7 +68,7 @@ New entities can be added via the processor as well.
 
 Example:
 
-    Fixy fixtures = new JPAFixy(entityManager);
+    Fixy fixtures = JPAFixy.create(entityManager);
     fixtures.addProcessor(new Processor<Employee>(Employee.class) {
         public void process(Employee emp) {
             emp.setName(emp.getFirstName() + " " + emp.getLastName());
