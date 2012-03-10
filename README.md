@@ -1,16 +1,20 @@
-Fixy : Yaml fixtures for JPA
+Fixy : Yaml fixtures for Java
 ========
 ![Fixy](https://raw.github.com/sberan/Fixy/master/fixy.jpg)
 
 ![build status](https://secure.travis-ci.org/sberan/Fixy.png)
 
-Fixy makes unit testing your JPA entities much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
+Fixy makes unit testing your persistence layer much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
 create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test 
 fixtures, with a few goodies added such as **package declaration**, **imports**, and **processors**
 
+Supported Persistence Frameworks:
+---------------------------------
+ - JPA
+ - Morphia (MongoDB)
 
 
-Example
+Example (using JPA)
 ------------
 employees.yaml:
 
@@ -28,7 +32,7 @@ employees.yaml:
 Now use your fixtures from Java:
 
     //load fixtures
-    Fixy fixtures = new Fixy(entityManager);
+    Fixy fixtures = new JPAFixy(entityManager);
     fixtures.load("employees.yaml");
 
     //run query
@@ -60,12 +64,12 @@ times they are declared.
 
 Processors
 -------------
-Processors allow you to simulate stored procedures and other junk before your entities get persisted.
-You can add new entities via the processor as well.
+Processors allow you to simulate stored procedures and other logic before your entities get persisted.
+New entities can be added via the processor as well.
 
-Java Example:
+Example:
 
-    Fixy fixtures = new Fixy(entityManager);
+    Fixy fixtures = new JPAFixy(entityManager);
     fixtures.addProcessor(new Processor<Employee>(Employee.class) {
         public void process(Employee emp) {
             emp.setName(emp.getFirstName() + " " + emp.getLastName());
@@ -87,12 +91,22 @@ If you're using Maven, simply add my Maven repository:
 
 And the Fixy dependency:
 
+###JPA:
+
     <dependency>
         <groupId>com.pearson</groupId>
-        <artifactId>fixy</artifactId>
-        <version>1.2</version>
+        <artifactId>fixy-jpa</artifactId>
+        <version>2.0</version>
     </dependency>
 
+
+### Morphia:
+
+    <dependency>
+        <groupId>com.pearson</groupId>
+        <artifactId>fixy-morphia</artifactId>
+        <version>2.0</version>
+    </dependency>
 
 More Info
 -----------
