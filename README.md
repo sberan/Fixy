@@ -1,6 +1,6 @@
 Fixy : Yaml fixtures for Java
 ========
-![Fixy](https://raw.github.com/sberan/Fixy/master/coreFixy.jpg)
+[![Build Status](https://secure.travis-ci.org/sberan/Fixy.png?branch=master)](http://travis-ci.org/sberan/Fixy)
 
 ![build status](https://secure.travis-ci.org/sberan/Fixy.png)
 
@@ -32,7 +32,7 @@ employees.yaml:
 Now use your fixtures from Java:
 
     //load fixtures
-    Fixy fixtures = new JPAFixy(entityManager);
+    Fixy fixtures = JPAFixy.create(entityManager);
     fixtures.load("employees.yaml");
 
     //run query
@@ -95,7 +95,7 @@ And the Fixy dependency:
 
     <dependency>
         <groupId>com.pearson</groupId>
-        <artifactId>coreFixy-jpa</artifactId>
+        <artifactId>fixy-jpa</artifactId>
         <version>2.0</version>
     </dependency>
 
@@ -104,9 +104,15 @@ And the Fixy dependency:
 
     <dependency>
         <groupId>com.pearson</groupId>
-        <artifactId>coreFixy-morphia</artifactId>
+        <artifactId>fixy-morphia</artifactId>
         <version>2.0</version>
     </dependency>
+
+
+Upgrading from 1.X:
+-----------
+  - Change dependency artifactId from fixy to fixy-jpa
+  - Use JPAFixy.create() rather than new Fixy()
 
 More Info
 -----------
