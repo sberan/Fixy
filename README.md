@@ -111,6 +111,7 @@ And the Fixy dependency:
 Upgrading from 1.X:
 -----------
   - Change dependency artifactId from fixy to fixy-jpa
+  - Change package from com.pearson to com.fixy
   - Use JPAFixy.create() rather than new Fixy()
 
 More Info
