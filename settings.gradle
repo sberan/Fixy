@@ -1,0 +1,1 @@
+include 'fixy-core', 'fixy-jpa', 'fixy-morphia'

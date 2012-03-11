@@ -12,3 +12,6 @@ MANIFEST.MF
 .DS_Store
 derby.log
 /fixy-jpa/petstore/
+build/
+.gradle
+
