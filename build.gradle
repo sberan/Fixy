@@ -1,10 +1,15 @@
 apply plugin: 'idea'
+apply plugin: 'maven'
+
 
 subprojects {
-  version=2.0
-
   apply plugin: 'java'
   apply plugin: 'idea'
+  apply plugin: 'maven'
+
+  group = 'com.fixy'
+  version = 2.0
+
 
   sourceCompatibility = 1.6
 
@@ -19,6 +24,15 @@ subprojects {
   dependencies {
     testCompile 'junit:junit:4.9'
   }
+
+  uploadArchives {
+      repositories {
+          mavenDeployer {
+              repository(url: file("../../mvn-repo/releases").toURL())
+          }
+      }
+  }
+
 }
 
 project(':fixy-core') {
