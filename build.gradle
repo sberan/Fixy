@@ -1,6 +1,11 @@
+apply plugin: 'idea'
+
 subprojects {
   version=2.0
+
   apply plugin: 'java'
+  apply plugin: 'idea'
+
   sourceCompatibility = 1.6
 
   repositories {
@@ -19,17 +24,18 @@ subprojects {
 project(':fixy-core') {
   dependencies {
     compile 'org.yaml:snakeyaml:1.9',
-            'com.google.guava:guava:10.0.1',
+            'com.google.guava:guava:10.0.1'
   }
 }
 
 project(':fixy-jpa') {
   dependencies {
     compile project(':fixy-core'),
-            'org.hibernate.java-persistence:jpa-api:2.0-cr-1',
-            'org.hibernate:hibernate-entitymanager:3.6.8.Final',
-            'org.apache.derby:derby:10.8.2.2',
-            'org.slf4j:slf4j-log4j12:1.6.4'
+            'org.hibernate.java-persistence:jpa-api:2.0-cr-1'
+    
+    testCompile 'org.hibernate:hibernate-entitymanager:3.6.8.Final',
+                'org.apache.derby:derby:10.8.2.2',
+                'org.slf4j:slf4j-log4j12:1.6.4'
   }
 }
 
