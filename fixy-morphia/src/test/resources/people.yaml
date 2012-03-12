@@ -1,0 +1,10 @@
+ - !package com.fixy
+
+ - Person(jerry):
+     firstName: Jerry
+     lastName: Seinfeld
+
+ - Person(george):
+     firstName: George
+     lastName: Costanza
+

@@ -7,7 +7,7 @@ public class MorphiaFixy {
         return  new CoreFixy(new MorphiaPersister(datastore), defaultPackage);
     }
 
-    public Fixy create(Datastore datastore) {
+    public static Fixy create(Datastore datastore) {
         return new CoreFixy(new MorphiaPersister(datastore));
     }
 }

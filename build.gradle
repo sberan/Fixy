@@ -57,5 +57,7 @@ project(':fixy-morphia') {
   dependencies {
     compile project(':fixy-core'),
             'com.google.code.morphia:morphia:0.99'
+
+    testCompile 'org.mockito:mockito-all:1.9.0'
   }
 }
