@@ -107,6 +107,11 @@ And the Fixy dependency:
         <version>2.0</version>
     </dependency>
 
+Contributors
+-------------
+ - Sam Beran (@sberan)
+ - Chris Collison (@collisonchris)
+ - Mohamed Mounirou (@mmounirou)
 
 Upgrading from 1.X:
 -----------
