@@ -4,3 +4,5 @@
 - Pet(fido):
     name: Fido
     type: PetType(dog)
+    price: !!Long 100
+    birthDate: !!java.sql.Date 2001-09-09T01:46:40Z

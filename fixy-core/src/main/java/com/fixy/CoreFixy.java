@@ -78,10 +78,20 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
     @Override
     protected Class<?> getClassForName(String name) throws ClassNotFoundException {
         if(!Strings.isNullOrEmpty(packageName)) {
-            return super.getClassForName(packageName + "." + name);
-        } else {
-            return super.getClassForName(name);
+            try {
+                return super.getClassForName(packageName + "." + name);
+            } catch (ClassNotFoundException ignored) { }
         }
+        ClassNotFoundException exceptionToThrow;
+        try {
+            return super.getClassForName(name);
+        } catch (ClassNotFoundException e) {
+            exceptionToThrow = e;
+        }
+        try {
+            return super.getClassForName("java.lang." + name);
+        } catch (ClassNotFoundException ignored) { }
+        throw exceptionToThrow;
     }
     
     @Override
