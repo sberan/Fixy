@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import java.sql.Date;
 
 @Entity
 public class Pet {
@@ -19,6 +20,8 @@ public class Pet {
     PetType type;
     
     Long price;
+
+    Date birthDate;
 
     @OneToOne(mappedBy = "pet")
     Order order;
@@ -54,6 +57,14 @@ public class Pet {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Order getOrder() {
