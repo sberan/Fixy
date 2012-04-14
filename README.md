@@ -85,7 +85,7 @@ If you're using Maven, simply add my Maven repository:
     <repository>
       <id>sberan-github</id>
       <name>sberan-github</name>
-      <url>https://github.com/sberan/mvn-repo/raw/master/releases</url>
+      <url>https://raw.github.com/sberan/mvn-repo/master/releases</url>
     </repository>
 
 And the Fixy dependency:
