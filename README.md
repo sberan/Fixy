@@ -93,7 +93,7 @@ And the Fixy dependency:
 ###JPA:
 
     <dependency>
-        <groupId>com.pearson</groupId>
+        <groupId>com.fixy</groupId>
         <artifactId>fixy-jpa</artifactId>
         <version>2.0</version>
     </dependency>
@@ -102,7 +102,7 @@ And the Fixy dependency:
 ### Morphia:
 
     <dependency>
-        <groupId>com.pearson</groupId>
+        <groupId>com.fixy</groupId>
         <artifactId>fixy-morphia</artifactId>
         <version>2.0</version>
     </dependency>
