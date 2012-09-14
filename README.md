@@ -2,10 +2,14 @@ Fixy : Yaml fixtures for Java
 ========
 [![Build Status](https://secure.travis-ci.org/sberan/Fixy.png?branch=master)](http://travis-ci.org/sberan/Fixy)
 
+ *Winner - 2012 10gen Open Source Hackathon*
+ 
+ *"Fixy has made my unit-testing life (outside of using Play framework) quite a bit easier" -Fixy User*
 
 Fixy makes unit testing your persistence layer much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
 create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test 
 fixtures, with a few goodies added such as **package declaration**, **imports**, and **processors**
+
 
 Supported Persistence Frameworks:
 ---------------------------------
@@ -28,7 +32,7 @@ employees.yaml:
         lastName: Gibbons
         manager: Employee(bill)
 
-Now use your fixtures from Java:
+Now use your fixtures from Java: (assuming you have a transaction active)
 
     //load fixtures
     Fixy fixtures = JPAFixy.create(entityManager);
@@ -113,13 +117,7 @@ Contributors
  - Chris Collison (@collisonchris)
  - Mohamed Mounirou (@mmounirou)
 
-Upgrading from 1.X:
------------
-  - Change dependency artifactId from fixy to fixy-jpa
-  - Change package from com.pearson to com.fixy
-  - Use JPAFixy.create() rather than new Fixy()
-
-More Info
+Additional Documentation
 -----------
 
-For now, have a look at the unit tests for your persistence framework.
+See the [JPA unit tests](https://github.com/sberan/Fixy/tree/master/fixy-jpa/src/test) for some great usage examples.
