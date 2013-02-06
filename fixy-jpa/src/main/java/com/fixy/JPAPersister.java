@@ -13,18 +13,18 @@ class JPAPersister implements Persister {
     }
 
     public JPAPersister(EntityManager entityManager, boolean mergeEntities) {
-    	this.entityManager = entityManager;
-    	this.mergeEntities = mergeEntities;
+        this.entityManager = entityManager;
+        this.mergeEntities = mergeEntities;
     }
     
     public void persist(Object entity) {
         if (entity.getClass().isAnnotationPresent(Entity.class)) {
-        	if(mergeEntities) {
-        		entityManager.merge(entity);
-        	} else {
-        		entityManager.persist(entity);
-        	}
-            
+            if (mergeEntities) {
+                entityManager.merge(entity);
+            } else {
+                entityManager.persist(entity);
+            }
+
         }
     }
 

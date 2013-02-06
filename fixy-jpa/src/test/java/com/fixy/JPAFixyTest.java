@@ -22,7 +22,7 @@ public class JPAFixyTest {
     Fixy detachedFixtures;
 
     @Before public void setup() {
-    	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
+        petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
         fixtures = JPAFixy.create(petstore, "com.petstore");
         detachedFixtures = JPAFixy.create(petstore, "com.petstore", true);
@@ -33,9 +33,9 @@ public class JPAFixyTest {
     }
 
     @Test public void testDetachedEntities() {
-    	detachedFixtures.load("owners.yaml");
-    	
-    	Owner owner = petstore.createQuery("select o from Owner o where o.name = 'John'", Owner.class).getSingleResult();
+        detachedFixtures.load("owners.yaml");
+
+        Owner owner = petstore.createQuery("select o from Owner o where o.name = 'John'", Owner.class).getSingleResult();
 
         assertThat(owner.getName(), is("John"));
     }
