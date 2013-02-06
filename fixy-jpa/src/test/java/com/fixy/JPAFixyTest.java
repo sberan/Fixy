@@ -1,6 +1,7 @@
 package com.fixy;
 
 import com.petstore.Order;
+import com.petstore.Owner;
 import com.petstore.Pet;
 import com.petstore.PetType;
 import com.petstore.users.User;
@@ -18,17 +19,27 @@ import static org.junit.Assert.assertThat;
 public class JPAFixyTest {
     EntityManager petstore;
     Fixy fixtures;
+    Fixy detachedFixtures;
 
     @Before public void setup() {
     	petstore = Persistence.createEntityManagerFactory("petstore").createEntityManager();
         petstore.getTransaction().begin();
         fixtures = JPAFixy.create(petstore, "com.petstore");
+        detachedFixtures = JPAFixy.create(petstore, "com.petstore", true);
     }
 
     @After public void tearDown() {
         petstore.getTransaction().rollback();
     }
 
+    @Test public void testDetachedEntities() {
+    	detachedFixtures.load("owners.yaml");
+    	
+    	Owner owner = petstore.createQuery("select o from Owner o where o.name = 'John'", Owner.class).getSingleResult();
+
+        assertThat(owner.getName(), is("John"));
+    }
+    
     @Test public void testPetTypes() {
         fixtures.load("pet_types.yaml");
 

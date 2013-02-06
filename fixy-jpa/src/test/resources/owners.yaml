@@ -1,0 +1,13 @@
+- !package com.petstore
+
+- Owner(john):
+    id: 1
+    name: John
+      
+- Owner(tom):
+    id: 2
+    name: Tom  
+
+- Owner(joey):
+    id: 3
+    name: Joey  
