@@ -7,6 +7,7 @@
         <class>com.petstore.Pet</class>
         <class>com.petstore.PetType</class>
         <class>com.petstore.users.User</class>
+        <class>com.petstore.Owner</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:derby:petstore;create=true"/>
             <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
