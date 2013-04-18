@@ -10,6 +10,7 @@ import org.yaml.snakeyaml.constructor.AbstractConstruct;
 
 import org.yaml.snakeyaml.extensions.compactnotation.CompactConstructor;
 import org.yaml.snakeyaml.extensions.compactnotation.CompactData;
+import org.yaml.snakeyaml.introspector.BeanAccess;
 import org.yaml.snakeyaml.nodes.Node;
 import org.yaml.snakeyaml.nodes.ScalarNode;
 import org.yaml.snakeyaml.nodes.Tag;
@@ -23,7 +24,7 @@ import java.util.Queue;
 class ConstructImport extends AbstractConstruct {
     private final CoreFixy coreFixy;
     private final List<String> importedPackages = Lists.newArrayList();
-    
+
     public ConstructImport(CoreFixy coreFixy) {
         this.coreFixy = coreFixy;
     }
@@ -40,7 +41,7 @@ class ConstructImport extends AbstractConstruct {
 
 class ConstructPackage extends AbstractConstruct {
     private final CoreFixy coreFixy;
-    
+
     public ConstructPackage(CoreFixy coreFixy) {
         this.coreFixy = coreFixy;
     }
@@ -61,18 +62,24 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
     private final Multimap<Class<?>, Processor<? super Object>> postProcessors = HashMultimap.create();
     private final Persister persister;
     private final String defaultPackage;
+    private final BeanAccess beanAccess;
     private String packageName;
-    
+
+    public CoreFixy(Persister persister) {
+        this(persister, "");
+    }
+
     public CoreFixy(Persister persister, String defaultPackage) {
+        this(persister, defaultPackage, BeanAccess.DEFAULT);
+    }
+
+    public CoreFixy(Persister persister, String defaultPackage, BeanAccess beanAccess) {
         this.yamlConstructors.put(new Tag("!import"), new ConstructImport(this));
         this.yamlConstructors.put(new Tag("!package"), new ConstructPackage(this));
         this.defaultPackage = defaultPackage;
         this.packageName = defaultPackage;
         this.persister = persister;
-    }
-
-    public CoreFixy(Persister persister) {
-        this(persister, "");
+        this.beanAccess = beanAccess;
     }
 
     @Override
@@ -93,7 +100,7 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
         } catch (ClassNotFoundException ignored) { }
         throw exceptionToThrow;
     }
-    
+
     @Override
     protected Object createInstance(ScalarNode node, CompactData data) throws Exception {
         if(!entityCache.containsKey(node.getValue())) {
@@ -106,6 +113,7 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
 
     void loadEntities(String... files) {
     	Yaml yaml = new Yaml(this);
+        yaml.setBeanAccess(beanAccess);
         for(String file : files) {
             if(!file.startsWith("/")) {
                 file = "/" + file;
@@ -131,7 +139,7 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
             persister.persist(entity);
         }
     }
-    
+
     public void load(String... files) {
         loadEntities(files);
         persistEntities();
@@ -142,7 +150,7 @@ public final class CoreFixy extends CompactConstructor implements Fixy {
         Processor<? super Object> casted = (Processor<? super Object>) postProcessor;
         postProcessors.put(postProcessor.getType(), casted);
     }
-    
+
     void setPackage(String packageName) {
         this.packageName = packageName;
     }
