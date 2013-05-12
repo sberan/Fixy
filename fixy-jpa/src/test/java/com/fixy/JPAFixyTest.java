@@ -1,6 +1,10 @@
 package com.fixy;
 
-import com.petstore.*;
+import com.petstore.ImmutableOwner;
+import com.petstore.Order;
+import com.petstore.Owner;
+import com.petstore.Pet;
+import com.petstore.PetType;
 import com.petstore.users.User;
 
 import org.junit.After;

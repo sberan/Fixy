@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Builds a Fixy for use with Morphia.
+ * Builds a Fixy for use with JPA.
  */
 public class JpaFixyBuilder {
 
