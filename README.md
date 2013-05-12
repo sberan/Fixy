@@ -3,11 +3,11 @@ Fixy : Yaml fixtures for Java
 [![Build Status](https://secure.travis-ci.org/sberan/Fixy.png?branch=master)](http://travis-ci.org/sberan/Fixy)
 
  *Winner - 2012 10gen Open Source Hackathon*
- 
+
  *"Fixy has made my unit-testing life (outside of using Play framework) quite a bit easier" -Fixy User*
 
 Fixy makes unit testing your persistence layer much easier using [SnakeYAML](http://code.google.com/p/snakeyaml/) to
-create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test 
+create test fixtures and persist them to your database. It's similar to Rails and Play! Framework's test
 fixtures, with a few goodies added such as **package declaration**, **imports**, and **processors**
 
 
@@ -22,7 +22,7 @@ Example (using JPA)
 employees.yaml:
 
     - !package com.innotech
-    
+
     - Employee(bill):
         firstName: Bill
         lastName: Lumbergh
@@ -35,7 +35,7 @@ employees.yaml:
 Now use your fixtures from Java: (assuming you have a transaction active)
 
     //load fixtures
-    Fixy fixtures = JPAFixy.create(entityManager);
+    Fixy fixtures = new JpaFixyBuilder(entityManager).build();
     fixtures.load("employees.yaml");
 
     //run query
@@ -72,7 +72,7 @@ New entities can be added via the processor as well.
 
 Example:
 
-    Fixy fixtures = JPAFixy.create(entityManager);
+    Fixy fixtures = new JpaFixyBuilder(entityManager).build();
     fixtures.addProcessor(new Processor<Employee>(Employee.class) {
         public void process(Employee emp) {
             emp.setName(emp.getFirstName() + " " + emp.getLastName());
@@ -85,7 +85,7 @@ Installing
 The Fixy jars are located in [My Repository](https://github.com/sberan/mvn-repo/).
 
 If you're using Maven, simply add my Maven repository:
-   
+
     <repository>
       <id>sberan-github</id>
       <name>sberan-github</name>
@@ -99,7 +99,7 @@ And the Fixy dependency:
     <dependency>
         <groupId>com.fixy</groupId>
         <artifactId>fixy-jpa</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
     </dependency>
 
 
@@ -108,7 +108,7 @@ And the Fixy dependency:
     <dependency>
         <groupId>com.fixy</groupId>
         <artifactId>fixy-morphia</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
     </dependency>
 
 Contributors
@@ -116,6 +116,7 @@ Contributors
  - Sam Beran (@sberan)
  - Chris Collison (@collisonchris)
  - Mohamed Mounirou (@mmounirou)
+ - Jens Nehlmeier (@jnehlmeier)
 
 Additional Documentation
 -----------

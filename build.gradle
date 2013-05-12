@@ -10,7 +10,7 @@ subprojects {
   apply plugin: 'maven'
 
   group = 'com.fixy'
-  version = 2.0
+  version = 2.1
 
 
   sourceCompatibility = 1.6
@@ -22,9 +22,9 @@ subprojects {
       url 'http://morphia.googlecode.com/svn/mavenrepo/'
     }
   }
-  
+
   dependencies {
-    testCompile 'junit:junit:4.9'
+    testCompile 'junit:junit:4.11'
   }
 
   uploadArchives {
@@ -39,8 +39,8 @@ subprojects {
 
 project(':fixy-core') {
   dependencies {
-    compile 'org.yaml:snakeyaml:1.9',
-            'com.google.guava:guava:10.0.1'
+    compile 'org.yaml:snakeyaml:1.12',
+            'com.google.guava:guava:14.0.1'
   }
 }
 
@@ -48,10 +48,10 @@ project(':fixy-jpa') {
   dependencies {
     compile project(':fixy-core'),
             'org.hibernate.java-persistence:jpa-api:2.0-cr-1'
-    
-    testCompile 'org.hibernate:hibernate-entitymanager:3.6.8.Final',
-                'org.apache.derby:derby:10.8.2.2',
-                'org.slf4j:slf4j-log4j12:1.6.4'
+
+    testCompile 'org.hibernate:hibernate-entitymanager:4.2.1.Final',
+                'org.apache.derby:derby:10.10.1.1',
+                'org.slf4j:slf4j-log4j12:1.7.5'
   }
 }
 
@@ -60,6 +60,6 @@ project(':fixy-morphia') {
     compile project(':fixy-core'),
             'com.google.code.morphia:morphia:0.99'
 
-    testCompile 'org.mockito:mockito-all:1.9.0'
+    testCompile 'org.mockito:mockito-all:1.9.5'
   }
 }
