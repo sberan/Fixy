@@ -103,6 +103,15 @@ And the Fixy dependency:
     </dependency>
 
 
+###Hibernate:
+
+    <dependency>
+        <groupId>com.fixy</groupId>
+        <artifactId>fixy-hibernate</artifactId>
+        <version>2.1</version>
+    </dependency>
+
+
 ### Morphia:
 
     <dependency>
