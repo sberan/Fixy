@@ -55,6 +55,17 @@ project(':fixy-jpa') {
   }
 }
 
+project(':fixy-hibernate') {
+  dependencies {
+    compile project(':fixy-core'),
+            'org.hibernate:hibernate-core:4.2.1.Final'
+
+    testCompile 'org.hibernate:hibernate-core:4.2.1.Final',
+                'org.apache.derby:derby:10.10.1.1',
+                'org.slf4j:slf4j-log4j12:1.7.5'
+  }
+}
+
 project(':fixy-morphia') {
   dependencies {
     compile project(':fixy-core'),

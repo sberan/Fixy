@@ -1,1 +1,1 @@
-include 'fixy-core', 'fixy-jpa', 'fixy-morphia'
+include 'fixy-core', 'fixy-jpa', 'fixy-morphia', 'fixy-hibernate'
