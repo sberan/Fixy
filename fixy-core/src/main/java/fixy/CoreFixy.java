@@ -1,4 +1,4 @@
-package com.fixy;
+package fixy;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;

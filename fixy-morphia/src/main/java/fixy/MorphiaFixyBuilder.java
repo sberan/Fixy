@@ -1,4 +1,4 @@
-package com.fixy;
+package fixy;
 
 import com.google.code.morphia.Datastore;
 import org.yaml.snakeyaml.introspector.BeanAccess;
