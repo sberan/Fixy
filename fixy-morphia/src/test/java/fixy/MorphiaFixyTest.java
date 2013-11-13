@@ -1,4 +1,4 @@
-package com.fixy;
+package fixy;
 
 import com.google.code.morphia.Datastore;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class MorphiaFixyTest {
     }
 
     @Test public void testMorphiaNoPackage() {
-        Fixy fixtures = new MorphiaFixyBuilder(ds).withDefaultPackage("com.fixy").build();
+        Fixy fixtures = new MorphiaFixyBuilder(ds).withDefaultPackage("fixy").build();
         fixtures.load("people-nopackage.yaml");
 
         Person expected = new Person();

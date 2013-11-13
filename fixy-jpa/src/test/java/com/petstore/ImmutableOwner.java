@@ -28,7 +28,7 @@ public class ImmutableOwner {
 
     /*
      * Intentionally not named 'getName()' to further illustrate field access
-     * instead of property access in com.fixy.JPAFixyTest#testFieldAccessEntities()
+     * instead of property access in fixy.JPAFixyTest#testFieldAccessEntities()
      */
     public String getOwnerName() {
         return name;

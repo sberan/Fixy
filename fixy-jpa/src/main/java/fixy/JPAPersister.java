@@ -1,4 +1,4 @@
-package com.fixy;
+package fixy;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;

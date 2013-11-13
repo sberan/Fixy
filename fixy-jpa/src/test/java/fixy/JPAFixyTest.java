@@ -1,4 +1,4 @@
-package com.fixy;
+package fixy;
 
 import com.petstore.ImmutableOwner;
 import com.petstore.Order;

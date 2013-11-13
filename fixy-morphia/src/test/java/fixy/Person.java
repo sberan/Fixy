@@ -1,7 +1,6 @@
-package com.fixy;
+package fixy;
 
 import com.google.code.morphia.annotations.Entity;
-import com.google.common.base.Objects;
 
 @Entity
 public class Person {
