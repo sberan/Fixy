@@ -1,6 +1,6 @@
 package fixy;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 import org.yaml.snakeyaml.introspector.BeanAccess;
 
 import static com.google.common.base.Preconditions.checkNotNull;

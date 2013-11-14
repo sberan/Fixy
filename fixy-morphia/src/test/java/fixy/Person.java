@@ -1,6 +1,6 @@
 package fixy;
 
-import com.google.code.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Entity;
 
 @Entity
 public class Person {

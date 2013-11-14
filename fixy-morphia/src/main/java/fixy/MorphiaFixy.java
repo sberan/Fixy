@@ -1,6 +1,6 @@
 package fixy;
 
-import com.google.code.morphia.Datastore;
+import org.mongodb.morphia.Datastore;
 
 /**
  * Creates a Fixy for use with Morphia.
