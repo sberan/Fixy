@@ -39,8 +39,8 @@ subprojects {
 
 project(':fixy-core') {
   dependencies {
-    compile 'org.yaml:snakeyaml:1.12',
-            'com.google.guava:guava:14.0.1'
+    compile 'org.yaml:snakeyaml:1.13',
+            'com.google.guava:guava:15.0'
   }
 }
 
@@ -49,7 +49,7 @@ project(':fixy-jpa') {
     compile project(':fixy-core'),
             'org.hibernate.java-persistence:jpa-api:2.0-cr-1'
 
-    testCompile 'org.hibernate:hibernate-entitymanager:4.2.1.Final',
+    testRuntime 'org.hibernate:hibernate-entitymanager:4.2.7.Final',
                 'org.apache.derby:derby:10.10.1.1',
                 'org.slf4j:slf4j-log4j12:1.7.5'
   }
@@ -58,8 +58,9 @@ project(':fixy-jpa') {
 project(':fixy-morphia') {
   dependencies {
     compile project(':fixy-core'),
-            'com.google.code.morphia:morphia:0.99'
+            'org.mongodb.morphia:morphia:0.105'
 
     testCompile 'org.mockito:mockito-all:1.9.5'
+    testRuntime 'org.mongodb:mongo-java-driver:2.11.3'
   }
 }

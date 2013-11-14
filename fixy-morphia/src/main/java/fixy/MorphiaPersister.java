@@ -1,7 +1,7 @@
 package fixy;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.annotations.Entity;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.annotations.Entity;
 
 public class MorphiaPersister implements Persister {
 

@@ -1,11 +1,11 @@
 package fixy;
 
-import com.google.code.morphia.Datastore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mongodb.morphia.Datastore;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MorphiaFixyTest {
