@@ -13,6 +13,8 @@ import org.junit.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -31,8 +33,16 @@ public class JPAFixyTest {
         fieldAccessFixtures = new JpaFixyBuilder(petstore).withDefaultPackage("com.petstore").useFieldAccess().build();
     }
 
-    @After public void tearDown() {
-        petstore.getTransaction().rollback();
+    @After public void tearDown() throws SQLException {
+        petstore.getTransaction().commit();
+        petstore.close();
+        try {
+            DriverManager.getConnection("jdbc:derby:memory:petstore;drop=true");
+        } catch (SQLException sqle) {
+            // http://db.apache.org/derby/docs/10.10/ref/rrefattribdrop.html
+            // http://db.apache.org/derby/docs/10.10/devguide/cdevdvlp42173.html
+            if (!"08006".equals(sqle.getSQLState())) { throw sqle; }
+        }
     }
 
     @Test public void testFieldAccessEntities() {
